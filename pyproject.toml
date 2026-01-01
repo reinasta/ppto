@@ -1,0 +1,19 @@
+[project]
+name = "ppto"
+version = "0.1.0"
+description = "Prototype PPTX exporter with CLI helpers for Beamer and Typst."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "typer",
+    "python-pptx",
+    "pillow",
+]
+
+[project.scripts]
+ppto = "ppto.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
