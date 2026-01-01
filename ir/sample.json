@@ -1,0 +1,35 @@
+{
+  "size": { "width": 1280, "height": 720 },
+  "dpi": 150,
+  "theme": {
+    "colors": [
+      { "hex": "#1F77B4" },
+      { "hex": "#FF7F0E" }
+    ]
+  },
+  "slides": [
+    {
+      "index": 1,
+      "background": { "color": { "hex": "#FFFFFF" } },
+      "text_boxes": [
+        {
+          "position": { "x": 64, "y": 48 },
+          "size": { "width": 400, "height": 200 },
+          "runs": [
+            { "text": "Hello, world", "font_size_pt": 28, "bold": true }
+          ],
+          "z_index": 1
+        }
+      ],
+      "images": [
+        {
+          "position": { "x": 700, "y": 360 },
+          "size": { "width": 400, "height": 250 },
+          "source": "images/chart.png",
+          "description": "Chart example",
+          "z_index": 2
+        }
+      ]
+    }
+  ]
+}
