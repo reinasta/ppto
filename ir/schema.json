@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ppto-intermediate-representation",
+  "type": "object",
+  "properties": {
+    "size": {
+      "type": "object",
+      "properties": {
+        "width": { "type": "number" },
+        "height": { "type": "number" }
+      },
+      "required": ["width", "height"]
+    },
+    "dpi": { "type": "integer" },
+    "theme": {
+      "type": "object",
+      "properties": {
+        "colors": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/color" }
+        }
+      },
+      "required": ["colors"]
+    },
+    "slides": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/slide" }
+    }
+  },
+  "required": ["size", "dpi", "slides"],
+  "definitions": {
+    "point": {
+      "type": "object",
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" }
+      },
+      "required": ["x", "y"]
+    },
+    "size": {
+      "type": "object",
+      "properties": {
+        "width": { "type": "number" },
+        "height": { "type": "number" }
+      },
+      "required": ["width", "height"]
+    },
+    "color": {
+      "type": "object",
+      "properties": {
+        "hex": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        }
+      },
+      "required": ["hex"]
+    },
+    "text_run": {
+      "type": "object",
+      "properties": {
+        "text": { "type": "string" },
+        "font_size_pt": { "type": ["number", "null"] },
+        "color": { "$ref": "#/definitions/color" },
+        "bold": { "type": ["boolean", "null"] },
+        "italic": { "type": ["boolean", "null"] }
+      },
+      "required": ["text"]
+    },
+    "text_box": {
+      "type": "object",
+      "properties": {
+        "position": { "$ref": "#/definitions/point" },
+        "size": { "$ref": "#/definitions/size" },
+        "runs": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/text_run" }
+        },
+        "fill_color": { "$ref": "#/definitions/color" },
+        "z_index": { "type": "integer" }
+      },
+      "required": ["position", "size", "runs"]
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "position": { "$ref": "#/definitions/point" },
+        "size": { "$ref": "#/definitions/size" },
+        "source": { "type": "string" },
+        "description": { "type": ["string", "null"] },
+        "z_index": { "type": "integer" }
+      },
+      "required": ["position", "size", "source"]
+    },
+    "background": {
+      "type": "object",
+      "properties": {
+        "color": { "$ref": "#/definitions/color" },
+        "image": { "type": "string" }
+      }
+    },
+    "slide": {
+      "type": "object",
+      "properties": {
+        "index": { "type": "integer" },
+        "background": { "$ref": "#/definitions/background" },
+        "text_boxes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/text_box" }
+        },
+        "images": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/image" }
+        }
+      },
+      "required": ["index", "background", "text_boxes", "images"]
+    }
+  }
+}
