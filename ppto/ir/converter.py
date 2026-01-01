@@ -93,10 +93,14 @@ def _extract_image(shape, dpi: int, z_index: int) -> models.ImageElement:
 
 def _background(slide, dpi: int) -> models.Background:
     fill = getattr(slide, "background", None)
-    if fill and fill.fill and fill.fill.type and fill.fill.fore_color:
-        hex_color = _color_to_hex(fill.fill.fore_color)
-        if hex_color:
-            return models.Background(color=models.Color(hex=hex_color))
+    if fill and fill.fill:
+        try:
+            if fill.fill.type and fill.fill.fore_color:
+                hex_color = _color_to_hex(fill.fill.fore_color)
+                if hex_color:
+                    return models.Background(color=models.Color(hex=hex_color))
+        except (AttributeError, TypeError):
+            pass
     return models.Background()
 
 
